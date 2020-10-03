@@ -1,6 +1,6 @@
 package com.karis.videoozone.di
 
-import com.karis.videoozone.Util.Constants
+import com.karis.videoozone.util.Constants
 import com.karis.videoozone.data.network.ApiService
 import dagger.Module
 import dagger.Provides

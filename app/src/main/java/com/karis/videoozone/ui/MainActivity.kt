@@ -1,7 +1,8 @@
-package com.karis.videoozone
+package com.karis.videoozone.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.karis.videoozone.R
 
 
 class MainActivity : AppCompatActivity() {
