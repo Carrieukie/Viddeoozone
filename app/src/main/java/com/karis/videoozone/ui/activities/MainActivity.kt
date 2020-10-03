@@ -1,4 +1,4 @@
-package com.karis.videoozone.ui
+package com.karis.videoozone.ui.Activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
