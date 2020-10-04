@@ -8,7 +8,7 @@ import com.karis.videoozone.repository.MainRepository
 import com.karis.videoozone.util.Coroutines
 import retrofit2.Response
 
-class ActivityMainViewModule @ViewModelInject constructor(private val mainRepository: MainRepository) : ViewModel() {
+class ActivityMainViewModel @ViewModelInject constructor(private val mainRepository: MainRepository) : ViewModel() {
 
     var youTubeVideos = MutableLiveData<Response<YtResponse>>()
 

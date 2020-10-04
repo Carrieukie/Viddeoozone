@@ -14,7 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 @InstallIn(ApplicationComponent::class)
-
 @Module
 object NetworkModule {
 

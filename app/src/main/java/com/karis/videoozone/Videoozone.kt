@@ -1,4 +1,8 @@
 package com.karis.videoozone
 
-class Videoozone {
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class Videoozone : Application(){
 }
