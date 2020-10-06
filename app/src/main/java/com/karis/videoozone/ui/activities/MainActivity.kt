@@ -4,13 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.withStyledAttributes
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.karis.videoozone.R
 import com.karis.videoozone.interfaces.Onclick
-import com.karis.videoozone.models.ItemsItem
+import com.karis.videoozone.models.Videoitem
 import com.karis.videoozone.ui.recycleradapter.VideosAdapter
 import com.karis.videoozone.ui.viewModel.ActivityMainViewModel
+import com.karis.videoozone.util.Coroutines
+import com.karis.videoozone.util.VideoItemuTIL
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,15 +27,25 @@ class MainActivity : AppCompatActivity(), Onclick {
         setContentView(R.layout.activity_main)
 
         recyclerViewVideos.layoutManager = LinearLayoutManager(this)
-        viewModel.youTubeVideos.observe(this, Observer {
-            recyclerViewVideos.adapter = VideosAdapter(it.body()?.items as List<ItemsItem>,this)
-        })
+        initializeRecyclerView()
+    }
 
-        viewModel.fetchMostWachedVideos()
+    private fun initializeRecyclerView(){
+        val trendingVideosList = arrayListOf<Videoitem>()
+        val adapter = VideosAdapter(trendingVideosList, this)
+
+        Coroutines.main {
+            viewModel.trendingVideos.await().observe(this, Observer {
+                for (i in it.indices){
+                    trendingVideosList.add(i,it[i])
+                    recyclerViewVideos.adapter = adapter
+                }
+            })
+        }
 
     }
 
-    override fun videoItemClicked(ytResponse: ItemsItem) {
+    override fun videoItemClicked(ytResponse: Videoitem) {
         Intent(this, WatchingActivity::class.java).also {
             it.putExtra("ytResponse", ytResponse)
             startActivity(it)

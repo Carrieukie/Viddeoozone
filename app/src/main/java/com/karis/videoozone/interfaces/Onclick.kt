@@ -1,7 +1,8 @@
 package com.karis.videoozone.interfaces
 
-import com.karis.videoozone.models.ItemsItem
+import com.karis.videoozone.models.Videoitem
+
 
 interface Onclick {
-    fun videoItemClicked(ytResponse: ItemsItem)
+    fun videoItemClicked(ytResponse: Videoitem)
 }

@@ -6,16 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.karis.videoozone.models.YtResponse
 import com.karis.videoozone.repository.MainRepository
 import com.karis.videoozone.util.Coroutines
+import com.karis.videoozone.util.Coroutines.lazyDeferred
 import retrofit2.Response
 
 class ActivityMainViewModel @ViewModelInject constructor(private val mainRepository: MainRepository) : ViewModel() {
 
-    var youTubeVideos = MutableLiveData<Response<YtResponse>>()
-
-    fun fetchMostWachedVideos(){
-        Coroutines.io{
-            youTubeVideos.postValue(mainRepository.fetchVideos())
-        }
-
-    }
+        val trendingVideos by lazyDeferred { mainRepository.getTrendingVideos()}
 }
