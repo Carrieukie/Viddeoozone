@@ -1,11 +1,11 @@
-package com.karis.videoozone.data.database
+package com.karis.videoozone.data.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.karis.videoozone.models.Videoitem
+import com.karis.videoozone.model.Videoitem
 
 @Dao
 interface VideosDao {

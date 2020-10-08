@@ -1,4 +1,4 @@
-package com.karis.videoozone.data.network
+package com.karis.videoozone.data.retrofit
 
 
 import com.karis.videoozone.util.ApiException
@@ -6,7 +6,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Response
 
-abstract class SafeApiRequest {
+abstract class SafeYoutubeRequest {
 
     suspend fun <T : Any> safeApiRequest(call: suspend () -> Response<T>): T {
         val response = call.invoke()

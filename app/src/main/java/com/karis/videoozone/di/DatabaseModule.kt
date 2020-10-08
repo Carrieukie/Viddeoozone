@@ -2,8 +2,8 @@ package com.karis.videoozone.di
 
 import android.app.Application
 import androidx.room.Room
-import com.karis.videoozone.data.database.AppDatabase
-import com.karis.videoozone.data.database.VideosDao
+import com.karis.videoozone.data.room.AppDatabase
+import com.karis.videoozone.data.room.VideosDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

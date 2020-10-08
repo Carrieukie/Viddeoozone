@@ -1,7 +1,8 @@
 package com.karis.videoozone.di
 
+import com.google.gson.Gson
 import com.karis.videoozone.util.Constants
-import com.karis.videoozone.data.network.ApiService
+import com.karis.videoozone.data.retrofit.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,17 +13,20 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
 @Module
 object NetworkModule {
 
     @Provides
+    @Singleton
     fun providesBaseUrl(): String {
         return Constants.BASE_URL
     }
 
     @Provides
+    @Singleton
     fun providesLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     }
@@ -30,6 +34,7 @@ object NetworkModule {
 
 
     @Provides
+    @Singleton
     fun providesOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
     ): OkHttpClient {
@@ -42,11 +47,19 @@ object NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun providesConverterFactory(): Converter.Factory {
         return GsonConverterFactory.create()
     }
 
     @Provides
+    @Singleton
+    fun providesGson(): Gson {
+        return Gson()
+    }
+
+    @Provides
+    @Singleton
     fun providesRetrofit(
         baseUrl: String,
         converterFactory: Converter.Factory,
@@ -60,6 +73,7 @@ object NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun providesApiClient(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }

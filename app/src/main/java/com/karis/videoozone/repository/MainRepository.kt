@@ -1,23 +1,26 @@
 package com.karis.videoozone.repository
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.karis.videoozone.data.database.AppDatabase
-import com.karis.videoozone.data.network.ApiService
-import com.karis.videoozone.data.network.SafeApiRequest
-import com.karis.videoozone.models.Videoitem
-import com.karis.videoozone.models.YtResponse
+import com.karis.videoozone.data.room.AppDatabase
+import com.karis.videoozone.data.retrofit.ApiService
+import com.karis.videoozone.data.retrofit.SafeYoutubeRequest
+import com.karis.videoozone.model.Videoitem
 import com.karis.videoozone.util.Coroutines
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 import javax.inject.Inject
 
 
 class MainRepository @Inject constructor(
+
     private val apiService: ApiService,
     private val appDatabase: AppDatabase
-) : SafeApiRequest(){
+) : SafeYoutubeRequest(){
 
     private val trendingVideos = MutableLiveData<List<Videoitem>>()
 
@@ -53,6 +56,23 @@ class MainRepository @Inject constructor(
             fetchTrendingVideos()
             appDatabase.videosDao().getAllVideos()
         }
+    }
+
+    private fun isInternetAvailable(context: Context ) : Boolean {
+        var result = false
+
+        val connectivityManager =  context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+
+        connectivityManager?.let {
+            it.getNetworkCapabilities(connectivityManager.activeNetwork)?.apply {
+                result = when {
+                    hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                    hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                    else -> false
+                }
+            }
+        }
+        return result
     }
 
 

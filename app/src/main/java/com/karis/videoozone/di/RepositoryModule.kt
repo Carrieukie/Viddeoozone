@@ -1,6 +1,7 @@
 package com.karis.videoozone.di
 
-import com.karis.videoozone.data.network.ApiService
+import com.karis.videoozone.data.retrofit.ApiService
+import com.karis.videoozone.data.room.AppDatabase
 import com.karis.videoozone.repository.MainRepository
 import dagger.Module
 import dagger.Provides
@@ -13,8 +14,8 @@ import javax.inject.Inject
 class RepositoryModule @Inject constructor(){
 
     @Provides
-    fun provideMainrepository(apiService: ApiService): MainRepository{
-        return MainRepository(apiService )
+    fun provideMainrepository(apiService: ApiService, appDatabase : AppDatabase): MainRepository{
+        return MainRepository(apiService , appDatabase)
     }
 
 }

@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.karis.videoozone.R
-import com.karis.videoozone.interfaces.Onclick
-import com.karis.videoozone.models.ItemsItem
+import com.karis.videoozone.util.interfaces.Onclick
+import com.karis.videoozone.model.Videoitem
 import com.karis.videoozone.util.VideoItemuTIL
 import kotlinx.android.synthetic.main.video_item.view.*
 
-class VideosAdapter(private var videos: List<ItemsItem>, onclick: Onclick) :
+class VideosAdapter(private var videos: List<Videoitem>, onclick: Onclick) :
     RecyclerView.Adapter<VideosAdapter.ViewHolder>() {
 
     private var onclick: Onclick = onclick
