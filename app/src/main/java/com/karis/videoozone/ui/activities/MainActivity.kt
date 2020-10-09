@@ -2,6 +2,7 @@ package com.karis.videoozone.ui.activities
 
 import android.content.Intent
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -20,20 +21,23 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), Onclick {
 
     private val viewModel by viewModels<ActivityMainViewModel>()
-    private var connectivityManager: ConnectivityManager? = null
-    private var connectivityManagerCallback: ConnectivityManager.NetworkCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         recyclerViewVideos.layoutManager = LinearLayoutManager(this)
-        initializeRecyclerView()
 
-        connectivityManager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        connectivityManagerCallback = ConnectivityManager.NetworkCallback(
-
-        )
+       val  connectivityManager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        connectivityManager?.let {
+            it.getNetworkCapabilities(connectivityManager.activeNetwork)?.apply {
+                when {
+                    hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> initializeRecyclerView()
+                    hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> initializeRecyclerView()
+                    else -> false
+                }
+            }
+        }
 
     }
 

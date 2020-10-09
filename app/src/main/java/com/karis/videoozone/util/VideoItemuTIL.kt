@@ -12,7 +12,7 @@ object VideoItemuTIL {
     fun convertViews(views: Long): String? {
         if (views < 1000) return "" + views
         val exp = (Math.log(views.toDouble()) / Math.log(1000.0)).toInt()
-        return String.format("%.1f %c", views / Math.pow(1000.0, exp.toDouble()), "kMGTPE"[exp - 1])
+        return String.format("%.1f%c", views / Math.pow(1000.0, exp.toDouble()), "KMGTPE"[exp - 1])
     }
 
 

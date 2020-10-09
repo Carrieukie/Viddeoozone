@@ -26,7 +26,7 @@ class VideosAdapter(private var videos: List<Videoitem>, onclick: Onclick) :
         val ytvideos = videos[position]
         holder.itemView.textView_VideoTitle.text = ytvideos.snippet?.title
         holder.itemView.textView_channelName.text = ytvideos.snippet?.channelTitle
-        holder.itemView.textView_Videoviews.text = VideoItemuTIL.convertViews(ytvideos.statistics?.viewCount?.toLong()!!) + " Views in "
+        holder.itemView.textView_Videoviews.text = VideoItemuTIL.convertViews(ytvideos.statistics?.viewCount?.toLong()!!) + " views in "
         holder.itemView.textView_hoursReleased.text = VideoItemuTIL.covertTimeToText(ytvideos.snippet?.publishedAt)
         Glide.with(holder.itemView.context).load(ytvideos.snippet?.thumbnails?.maxres?.url).into(holder.itemView.imageView_video)
         holder.itemView.setOnClickListener {
