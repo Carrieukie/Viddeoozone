@@ -18,7 +18,6 @@ object VideoItemuTIL {
 
     fun covertTimeToText(dataDate: String?): String? {
         var convTime: String? = null
-        val prefix = ""
         try {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
             val pasTime = dateFormat.parse(dataDate)
