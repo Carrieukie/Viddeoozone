@@ -9,18 +9,20 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.karis.videoozone.R
-import com.karis.videoozone.util.interfaces.Onclick
 import com.karis.videoozone.model.Videoitem
 import com.karis.videoozone.ui.ConnectivityLiveData.Connectivity
 import com.karis.videoozone.ui.recycleradapter.MovieListAdapter
 import com.karis.videoozone.ui.viewModel.ActivityMainViewModel
 import com.karis.videoozone.util.Coroutines
+import com.karis.videoozone.util.interfaces.Onclick
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.delay
+import kotlinx.android.synthetic.main.video_item.*
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), Onclick {
@@ -62,12 +64,12 @@ class MainActivity : AppCompatActivity(), Onclick {
             object : ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(network: Network?) {
                     super.onAvailable(network)
-                        Connectivity.isConnected.postValue(true)
+                    Connectivity.isConnected.postValue(true)
                 }
 
                 override fun onUnavailable() {
                     super.onUnavailable()
-                        Connectivity.isConnected.postValue(false)
+                    Connectivity.isConnected.postValue(false)
                 }
 
                 override fun onLost(network: Network?) {

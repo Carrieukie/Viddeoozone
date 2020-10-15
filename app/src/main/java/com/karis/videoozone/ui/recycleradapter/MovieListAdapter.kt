@@ -3,6 +3,7 @@ package com.karis.videoozone.ui.recycleradapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,10 @@ import com.karis.videoozone.util.VideoItemuTIL
 import com.karis.videoozone.util.interfaces.Onclick
 import kotlinx.android.synthetic.main.video_item.view.*
 
-class MovieListAdapter(private var onclick: Onclick) : ListAdapter<Videoitem,MovieListAdapter.ViewHolder>(DIFF_CALLBACK){
+
+class MovieListAdapter(private var onclick: Onclick) : ListAdapter<Videoitem, MovieListAdapter.ViewHolder>(
+    DIFF_CALLBACK
+){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListAdapter.ViewHolder {
         return ViewHolder(
@@ -27,10 +31,20 @@ class MovieListAdapter(private var onclick: Onclick) : ListAdapter<Videoitem,Mov
         holder.itemView.textView_channelName.text = ytvideos.snippet?.channelTitle
         holder.itemView.textView_Videoviews.text = VideoItemuTIL.convertViews(ytvideos.statistics?.viewCount?.toLong()!!) + " views in "
         holder.itemView.textView_hoursReleased.text = VideoItemuTIL.covertTimeToText(ytvideos.snippet?.publishedAt)
-        Glide.with(holder.itemView.context).load(ytvideos.snippet?.thumbnails?.maxres?.url).into(holder.itemView.imageView_video)
+        Glide.with(holder.itemView.context).load(ytvideos.snippet?.thumbnails?.maxres?.url).into(
+            holder.itemView.imageView_video
+        )
+
+        setFadeAnimation(holder.itemView);
+
         holder.itemView.setOnClickListener {
             onclick.videoItemClicked(ytvideos)
         }
+    }
+    private fun setFadeAnimation(view: View) {
+        val anim = AlphaAnimation(0.0f, 1.0f)
+        anim.duration = 1000
+        view.startAnimation(anim)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

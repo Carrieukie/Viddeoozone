@@ -21,12 +21,13 @@
 
         <TextView
             android:id="@+id/textView_VideoTitle"
+            android:transitionName="image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:fontFamily="@font/adventuring"
+            android:fontFamily="sans-serif"
             android:text="Megan Thee Stallion - Don’t Stop (feat. Young Thug) [Official Video]"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
