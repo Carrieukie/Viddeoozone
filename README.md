@@ -8,16 +8,13 @@ This is an app that consumes the youtube REST API with the `most-popular` chart 
  [Dagger-Hilt](https://dagger.dev/hilt/)
  
  
- Glide
+ [Glide](https://bumptech.github.io/glide/)
+  
+ 
+ [pierfrancescosoffritti youtube player](https://github.com/PierfrancescoSoffritti/android-youtube-player)
  
  
- Dagger-Hilt
+ [Parceler](https://github.com/dlew/joda-time-android)
  
  
- pierfrancescosoffritti youtube player
- 
- 
- Parceler
- 
- 
- Architecture Components
+ [Architecture Components](https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwiF2d7f67nsAhUZh9UKHa1fDlkYABAAGgJ3cw&ohost=www.google.com&cid=CAESQOD2mgIiAxYZAEG64rUCxOZDwMvAJz9dvOqGkU0PmEClC5fAVSkGMRpQorbUuc_uc1sGAPZMzNBVHT7O3_k5fiQ&sig=AOD64_2OkHSviMIndvo8M3xL93A9Znio-Q&q&adurl&ved=2ahUKEwirsNXf67nsAhVux4UKHbEtBq8Q0Qx6BAgaEAE)
