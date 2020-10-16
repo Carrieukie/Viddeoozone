@@ -7,12 +7,12 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 
-object VideoItemuTIL {
+object Numberutils {
 
-    fun convertViews(views: Long): String? {
-        if (views < 1000) return "" + views
-        val exp = (Math.log(views.toDouble()) / Math.log(1000.0)).toInt()
-        return String.format("%.1f%c", views / Math.pow(1000.0, exp.toDouble()), "KMGTPE"[exp - 1])
+    fun getShortenedNumber(number: Long): String? {
+        if (number < 1000) return "" + number
+        val exp = (Math.log(number.toDouble()) / Math.log(1000.0)).toInt()
+        return String.format("%.1f%c", number / Math.pow(1000.0, exp.toDouble()), "KMGTPE"[exp - 1])
     }
 
 

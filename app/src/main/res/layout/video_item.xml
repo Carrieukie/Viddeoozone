@@ -12,8 +12,8 @@
         <ImageView
             android:id="@+id/imageView_video"
             android:layout_width="0dp"
-            android:layout_height="253dp"
-            android:scaleType="centerCrop"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -21,16 +21,16 @@
 
         <TextView
             android:id="@+id/textView_VideoTitle"
-            android:transitionName="image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/product_sans_bold"
             android:text="Megan Thee Stallion - Don’t Stop (feat. Young Thug) [Official Video]"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
+            android:transitionName="image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView_video"
             app:layout_constraintTop_toBottomOf="@+id/imageView_video" />
@@ -40,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/product_sans_regular"
             android:text="Megan Thee Stallion"
             app:layout_constraintStart_toStartOf="@+id/textView_VideoTitle"
             app:layout_constraintTop_toBottomOf="@+id/textView_VideoTitle" />
@@ -49,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/product_sans_regular"
             android:text="17 hours ago"
             app:layout_constraintBottom_toBottomOf="@+id/textView_Videoviews"
             app:layout_constraintStart_toEndOf="@+id/textView_Videoviews"
@@ -61,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
+            android:fontFamily="@font/product_sans_regular"
             android:text="610k views"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView_channelName"
@@ -68,8 +71,8 @@
 
         <View
             android:id="@+id/divider"
-            android:layout_width="409dp"
-            android:layout_height="1dp"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
             android:background="?android:attr/listDivider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

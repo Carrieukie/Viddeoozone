@@ -101,9 +101,8 @@ dependencies {
 
     //Leak Canary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
-
-    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
-
+    
+    implementation 'net.danlew:android.joda:2.10.6.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

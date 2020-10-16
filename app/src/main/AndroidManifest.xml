@@ -14,9 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.WatchingActivity"></activity>
+        <activity android:name=".ui.activities.watching.WatchingActivity"
+            android:label="Trending videos"
+            android:parentActivityName=".ui.activities.main.MainActivity"
+            android:theme="@style/AppTheme.theme"
+            >
+        </activity>
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".ui.activities.main.MainActivity"
+            android:label="YT Trending videos"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
