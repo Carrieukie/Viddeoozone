@@ -106,10 +106,5 @@ class MainActivity : AppCompatActivity(), Onclick {
         }
     }
 
-    private fun setFadeAnimation(view: View) {
-        val anim = AlphaAnimation(0.0f, 1.0f)
-        anim.duration = 1000
-        view.startAnimation(anim)
-    }
 
 }

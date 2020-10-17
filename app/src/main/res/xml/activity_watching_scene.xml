@@ -8,10 +8,57 @@
         motion:constraintSetStart="@id/start"
         motion:duration="1000">
        <KeyFrameSet>
+           <KeyPosition
+               motion:motionTarget="@+id/textView_VideoTitle"
+               motion:framePosition="0"
+               motion:keyPositionType="pathRelative"
+               motion:percentX="10"
+               motion:percentY="10" />
        </KeyFrameSet>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/linearLayout"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/textView_VideoTitle" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            motion:layout_constraintTop_toBottomOf="@+id/youtube_player_view"
+            android:id="@+id/textView_VideoTitle"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintEnd_toEndOf="@+id/youtube_player_view"
+            motion:layout_constraintHorizontal_bias="0.0"
+            motion:layout_constraintStart_toStartOf="@+id/youtube_player_view"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@+id/youtube_player_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintTop_toBottomOf="@+id/youtube_player_view"
+            android:layout_marginStart="8dp"
+            motion:layout_constraintStart_toStartOf="@+id/youtube_player_view"
+            android:layout_marginTop="8dp"
+            android:id="@+id/textView_VideoTitle"
+            android:layout_marginLeft="8dp"
+            motion:layout_constraintHorizontal_bias="0.0" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            motion:layout_constraintTop_toBottomOf="@+id/textView7"
+            android:layout_marginStart="8dp"
+            motion:layout_constraintHorizontal_bias="1.0"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="32dp"
+            android:id="@+id/visibility" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
