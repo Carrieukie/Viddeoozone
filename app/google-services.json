@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "408254093809",
+    "firebase_url": "https://videoozone-cacbf.firebaseio.com",
+    "project_id": "videoozone-cacbf",
+    "storage_bucket": "videoozone-cacbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408254093809:android:2b62b7845a4de8755b4c50",
+        "android_client_info": {
+          "package_name": "com.karis.videoozone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408254093809-cdog2fn2g5ivueenhkrck8u29e6pobu1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7OlnvSC4sbZCb0K0RprVNcyyQ65xu_Pk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408254093809-cdog2fn2g5ivueenhkrck8u29e6pobu1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
