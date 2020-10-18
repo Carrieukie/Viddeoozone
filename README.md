@@ -3,7 +3,7 @@ This is an app that consumes the youtube REST API with the `most-popular` chart 
 
 # Snapshots
 ![20201016_221554](https://user-images.githubusercontent.com/25763374/96299847-5741ba80-0ffd-11eb-8e4c-4ad989121639.gif)
-
+![20201017_101013](https://user-images.githubusercontent.com/25763374/96330840-59d5fb80-1061-11eb-85d3-ff14c05637f3.gif)
 # Libraries Used
  - [Dagger-Hilt](https://dagger.dev/hilt/)  A fully static, compile-time dependency injection framework for both Java and Android.
  
