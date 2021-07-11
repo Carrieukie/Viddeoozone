@@ -7,24 +7,20 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AlphaAnimation
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.appbar.AppBarLayout
 import com.karis.videoozone.R
 import com.karis.videoozone.model.Videoitem
 import com.karis.videoozone.ui.ConnectivityLiveData.Connectivity
 import com.karis.videoozone.ui.activities.watching.WatchingActivity
-import com.karis.videoozone.ui.recycleradapter.MovieListAdapter
 import com.karis.videoozone.ui.viewModel.ActivityMainViewModel
-import com.karis.videoozone.util.Coroutines
 import com.karis.videoozone.util.interfaces.Onclick
 import dagger.hilt.android.AndroidEntryPoint
-
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -87,13 +83,10 @@ class MainActivity : AppCompatActivity(), Onclick {
 
 
     private fun initializeRecyclerView() {
-        val trendingVideosList = arrayListOf<Videoitem>()
-        Coroutines.main {
-            viewModel.trendingVideos.await().observe(this, Observer {
-                for (i in it.indices) {
-                    trendingVideosList.add(i, it[i])
-                }
-                adapter.submitList(trendingVideosList)
+
+        lifecycleScope.launch {
+            viewModel.trendingVideos.observe(this@MainActivity, Observer {
+                adapter.submitData(this@MainActivity.lifecycle,it)
             })
         }
 

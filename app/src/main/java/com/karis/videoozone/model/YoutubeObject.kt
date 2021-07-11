@@ -1,9 +1,6 @@
 package com.karis.videoozone.model
 
 import android.os.Parcelable
-import androidx.annotation.NonNull
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -16,6 +13,9 @@ data class YoutubeObject(
 	@field:SerializedName("nextPageToken")
 	val nextPageToken: String? = null,
 
+	@field:SerializedName("prevPageToken")
+	val prevPageToken: String? = null,
+
 	@field:SerializedName("pageInfo")
 	val pageInfo: PageInfo? = null,
 
@@ -23,7 +23,8 @@ data class YoutubeObject(
 	val etag: String? = null,
 
 	@field:SerializedName("items")
-	val items: List<Videoitem?>? = null
+	val items: List<Videoitem>
+
 ) : Parcelable
 
 @Parcelize
@@ -104,7 +105,6 @@ data class Statistics(
 ) : Parcelable
 
 @Parcelize
-@Entity(tableName = "videos_table")
 data class Videoitem(
 
 	@field:SerializedName("snippet")
@@ -116,8 +116,6 @@ data class Videoitem(
 	@field:SerializedName("etag")
 	val etag: String? = null,
 
-	@NonNull
-	@PrimaryKey(autoGenerate = false)
 	@field:SerializedName("id")
 	val id: String ,
 

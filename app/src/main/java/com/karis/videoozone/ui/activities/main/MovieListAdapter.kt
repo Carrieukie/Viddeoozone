@@ -1,9 +1,10 @@
-package com.karis.videoozone.ui.recycleradapter
+package com.karis.videoozone.ui.activities.main
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ import com.karis.videoozone.util.interfaces.Onclick
 import kotlinx.android.synthetic.main.video_item.view.*
 
 
-class MovieListAdapter(private var onclick: Onclick) : ListAdapter<Videoitem, MovieListAdapter.ViewHolder>(
+class MovieListAdapter(private var onclick: Onclick) : PagingDataAdapter<Videoitem, MovieListAdapter.ViewHolder>(
     DIFF_CALLBACK
 ){
 
@@ -27,10 +28,10 @@ class MovieListAdapter(private var onclick: Onclick) : ListAdapter<Videoitem, Mo
 
     override fun onBindViewHolder(holder: MovieListAdapter.ViewHolder, position: Int) {
         val ytvideos = getItem(position)
-        holder.itemView.textView_VideoTitle.text = ytvideos.snippet?.title
-        holder.itemView.textView_channelName.text = ytvideos.snippet?.channelTitle
-        holder.itemView.textView_Videoviews.text = Numberutils.getShortenedNumber(ytvideos.statistics?.viewCount?.toLong()!!) + " views in "
-        holder.itemView.textView_hoursReleased.text = Numberutils.covertTimeToText(ytvideos.snippet?.publishedAt)
+        holder.itemView.textView_VideoTitle.text = ytvideos?.snippet?.title
+        holder.itemView.textView_channelName.text = ytvideos?.snippet?.channelTitle
+        holder.itemView.textView_Videoviews.text = Numberutils.getShortenedNumber(ytvideos?.statistics?.viewCount?.toLong()!!) + " views in "
+        holder.itemView.textView_hoursReleased.text = Numberutils.covertTimeToText(ytvideos?.snippet?.publishedAt)
         Glide.with(holder.itemView.context).load(ytvideos.snippet?.thumbnails?.maxres?.url).into(
             holder.itemView.imageView_video
         )
