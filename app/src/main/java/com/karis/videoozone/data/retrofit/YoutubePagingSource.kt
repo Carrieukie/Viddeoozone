@@ -1,5 +1,6 @@
 package com.karis.videoozone.data.retrofit
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.karis.videoozone.model.Videoitem
@@ -7,41 +8,50 @@ import java.util.*
 
 class YoutubePagingSource(
     private val apiService: ApiService,
-) : PagingSource<String, Videoitem>() {
+) : PagingSource<Int, Videoitem>() {
 
-    private val tokens = Stack<String>()
+    private  val TAG = "YoutubePagingSource"
 
-    override suspend fun load(params: LoadParams<String>): LoadResult<String, Videoitem> {
+    private val tokens = mutableListOf<String>()
 
-        tokens.push(params.key)
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Videoitem> {
 
         return try {
-            val youtubeObject = apiService.fetchMostPopularVideos()
+
+            var page: Int = params.key ?: 0
+
+            val token = if (tokens.size == 0) {
+                null
+            }else{
+                tokens[page].also {
+                    page += 1
+                }
+            }
+
+            val youtubeObject = apiService.fetchMostPopularVideos(token)
+
+            tokens.add(youtubeObject.body()?.nextPageToken!!)
 
             LoadResult.Page(
                 data = youtubeObject.body()!!.items,
-                prevKey = tokens.pop(),
-                nextKey = youtubeObject.body()?.nextPageToken
+                prevKey = null, //Only page forward
+                nextKey = page
             )
 
+
         } catch (e: Exception) {
+            var em = e.message
+            Log.e(TAG, "load: $em")
             LoadResult.Error(e)
         }
 
     }
 
-    override fun getRefreshKey(state: PagingState<String, Videoitem>): String? {
-        // Try to find the page key of the closest page to anchorPosition, from
-        // either the prevKey or the nextKey, but you need to handle nullability
-        // here:
-        //  * prevKey == null -> anchorPage is the first page.
-        //  * nextKey == null -> anchorPage is the last page.
-        //  * both prevKey and nextKey null -> anchorPage is the initial page, so
-        //    just return null.
-        return state.anchorPosition?.let { anchorPosition ->
-            val anchorPage = state.closestPageToPosition(anchorPosition)
-            anchorPage?.prevKey ?: anchorPage?.nextKey
+    override fun getRefreshKey(state: PagingState<Int, Videoitem>): Int? {
 
-        }
+        return state.anchorPosition
+
     }
+
 }
+

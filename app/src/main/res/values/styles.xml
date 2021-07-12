@@ -7,9 +7,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="AppTheme.theme" parent="Theme.AppCompat.DayNight.DarkActionBar"/>
-
+    <style name="AppTheme.NoActionBar" parent="AppTheme" >
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
 </resources>
