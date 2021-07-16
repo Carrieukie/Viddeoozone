@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/loadingFragment">
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="com.karis.videoozone.ui.fragments.loading.LoadingFragment"
+        android:label="LoadingFragment" >
+        <action
+            android:id="@+id/loading_to_videoList"
+            app:destination="@id/videoListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoListFragment"
+        android:name="com.karis.videoozone.ui.fragments.videolist.VideoListFragment"
+        android:label="VideoListFragment" >
+        <action
+            android:id="@+id/videoList_to_watching"
+            app:destination="@id/watchingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/watchingFragment"
+        android:name="com.karis.videoozone.ui.fragments.watching.WatchingFragment"
+        android:label="WatchingFragment" >
+        <argument
+            android:name="youtube"
+            app:argType="com.karis.videoozone.model.Videoitem" />
+    </fragment>
+</navigation>

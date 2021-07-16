@@ -1,22 +1,23 @@
-package com.karis.videoozone.ui.activities.main
+package com.karis.videoozone.ui.fragments.videolist
 
-import android.content.Intent
+import android.content.Context.CONNECTIVITY_SERVICE
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.karis.videoozone.R
+import com.karis.videoozone.databinding.FragmentVideolistBinding
 import com.karis.videoozone.model.Videoitem
 import com.karis.videoozone.ui.ConnectivityLiveData.Connectivity
-import com.karis.videoozone.ui.activities.watching.WatchingActivity
-import com.karis.videoozone.ui.viewModel.ActivityMainViewModel
 import com.karis.videoozone.util.interfaces.Onclick
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,37 +25,37 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), Onclick {
+class VideoListFragment : Fragment(), Onclick {
 
-    private val viewModel by viewModels<ActivityMainViewModel>()
+    private lateinit var binding : FragmentVideolistBinding
+    private val viewModel by viewModels<VideoListViewModel>()
     private lateinit var networkRequest: NetworkRequest
     private lateinit var adapter: MovieListAdapter
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-
-        recyclerViewVideos.layoutManager = LinearLayoutManager(this)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentVideolistBinding.inflate(inflater,container,false)
+        binding.recyclerViewVideos.layoutManager = LinearLayoutManager(requireContext())
         adapter = MovieListAdapter(this)
-        recyclerViewVideos.adapter = adapter
+        binding.recyclerViewVideos.adapter = adapter
         networkRequest = NetworkRequest.Builder()
             .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
             .build()
-        val connectivityManager =
-            applicationContext.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager = requireContext().getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        Connectivity.isConnected.observe(this, Observer {
+        Connectivity.isConnected.observe(viewLifecycleOwner, {
             when {
                 true -> {
-                    recyclerViewVideos.visibility = View.VISIBLE
+                    binding.recyclerViewVideos.visibility = View.VISIBLE
 //                    noInternet.visibility = View.GONE
                     initializeRecyclerView()
                 }
                 false -> {
-                    recyclerViewVideos.visibility = View.GONE
+                    binding.recyclerViewVideos.visibility = View.GONE
 //                    noInternet.visibility = View.INVISIBLE
                 }
             }
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity(), Onclick {
         connectivityManager.registerNetworkCallback(
             networkRequest,
             object : ConnectivityManager.NetworkCallback() {
-                override fun onAvailable(network: Network?) {
+                override fun onAvailable(network: Network) {
                     super.onAvailable(network)
                     Connectivity.isConnected.postValue(true)
                 }
@@ -73,30 +74,30 @@ class MainActivity : AppCompatActivity(), Onclick {
                     Connectivity.isConnected.postValue(false)
                 }
 
-                override fun onLost(network: Network?) {
+                override fun onLost(network: Network) {
                     super.onLost(network)
                     Connectivity.isConnected.postValue(false)
                 }
             })
-
+        return binding.root
     }
+
 
 
     private fun initializeRecyclerView() {
 
         lifecycleScope.launch {
-            viewModel.trendingVideos.observe(this@MainActivity, Observer {
-                adapter.submitData(this@MainActivity.lifecycle,it)
+            viewModel.trendingVideos.observe(viewLifecycleOwner, Observer {
+                adapter.submitData(this@VideoListFragment.lifecycle,it)
             })
         }
 
     }
 
     override fun videoItemClicked(ytResponse: Videoitem) {
-        Intent(this, WatchingActivity::class.java).also {
-            it.putExtra("ytResponse", ytResponse)
-            startActivity(it)
-        }
+
+        val actions =VideoListFragmentDirections.videoListToWatching(ytResponse)
+            findNavController().navigate(actions)
     }
 
 

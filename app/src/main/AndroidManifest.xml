@@ -14,24 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.Loading.LoadingActivity"
+        <activity
+            android:name=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activities.watching.WatchingActivity"
-            android:label="Trending videos"
-            android:parentActivityName=".ui.activities.main.MainActivity">
-
-        </activity>
-        <activity
-            android:name=".ui.activities.main.MainActivity"
-            android:configChanges="orientation|screenSize">
-
         </activity>
     </application>
 

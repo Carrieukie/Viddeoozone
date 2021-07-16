@@ -1,4 +1,4 @@
-package com.karis.videoozone.ui.activities.main
+package com.karis.videoozone.ui.fragments.videolist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.karis.videoozone.R
